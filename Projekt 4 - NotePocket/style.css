@@ -1,0 +1,110 @@
+/*KOLORY*/
+:root{
+--primary-0:rgba( 75,145, 48,1) ;
+--primary-1:rgba( 69, 72, 68,1) ;
+--primary-2:rgba( 45, 94, 26,1) ;
+--primary-3:rgba( 61,224,  0,1) ;
+--primary-4:rgba(221,230,217,1) ;
+}
+
+body{
+    display: grid;
+    direction: column;
+    align-items: center;
+    background: var(--primary-1);
+    color: var(--primary-4);
+    font-family: 'Inconsolata', monospace;
+
+}
+a{
+    text-decoration: none;
+}
+a:link, a:visited{
+    color: inherit;
+}
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-around;
+    margin: 5ex 4ex;
+
+}
+nav button{
+width: 100px;
+height: 50px;
+border-radius:5% 5% 10% 10%;
+background: var(--primary-4);
+box-shadow: 0 4px 8px 0 var(--primary-2), 0 6px 20px 0 var(--primary-0);
+
+}
+section{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-flow: row-wrap;
+    color: #000;
+    background: var(--primary-4);
+    min-height: 200px;
+}
+header{
+    display: grid;
+    justify-content: center;
+    font-size: 5ex;
+}
+
+footer{
+    display: flex;
+    justify-content: center;
+    align-self: flex-end;
+    margin-top: 5px;
+}
+
+.stickyBase{
+    position: relative;
+    display: flex;
+    left:0px;
+    top:0px;
+    min-width: 200px;
+    max-width: 400px;
+    min-height: 200px;
+    max-height: 400px;
+    margin: 3px;
+}
+.stickyContainerTop{
+
+    
+}
+.stickyDelete{
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 30px;
+    height: 30px;
+    background: red;
+}
+
+.stickyChangeColor{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 30px;
+    height: 30px;
+    background: blue;
+}
+.stickyText{
+    position: relative;
+    width: 100%;
+    margin: 5px;
+    margin-top:35px;
+    border: 0;
+    resize: horizontal;
+    overflow: hidden;
+    background: none;
+    min-height: 155px;
+    max-height:355px;
+    min-width:200px;
+    max-width:390px;
+
+}
+
+
