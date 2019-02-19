@@ -61,7 +61,6 @@ footer{
 
 .stickyBase{
     position: relative;
-    display: flex;
     left:0px;
     top:0px;
     min-width: 200px;
@@ -69,40 +68,46 @@ footer{
     min-height: 200px;
     max-height: 400px;
     margin: 3px;
+    background: none;
 }
 .stickyContainerTop{
+    position: relative;
+    display: flex;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    justify-content: space-between;
 
-    
 }
-.stickyDelete{
-    position: absolute;
-    left: 0;
-    right: 0;
+.stickyTitle{
+    display: flex;
+    height: 30px;
+    background: inherit;
+    border: 0;
+    font-family: 'Inconsolata', monospace;
+    text-align:center; 
+    color: var(--primary-1);
+    font-weight: 600;
+}
+.stickyButtons{
     width: 30px;
     height: 30px;
-    background: red;
-}
+    font-size:25px;
+    margin: 5px;
+    color: var(--primary-1);
+}        
 
-.stickyChangeColor{
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 30px;
-    height: 30px;
-    background: blue;
-}
 .stickyText{
     position: relative;
-    width: 100%;
     margin: 5px;
-    margin-top:35px;
     border: 0;
     resize: horizontal;
+    font-family: 'Inconsolata', monospace;
+    color: var(--primary-1);
     overflow: hidden;
     background: none;
     min-height: 155px;
     max-height:355px;
-    min-width:200px;
+    min-width:215px;
     max-width:390px;
 
 }

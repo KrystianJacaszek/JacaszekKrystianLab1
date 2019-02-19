@@ -4,52 +4,123 @@ function basicFunc(){
     
 }
 
-function addNotes() {
+let stickyArray=[,];
+
+function zapisz(){
+
+    localStorage.setItem
+
+
+}
+
+function addNotes(){
 
     let notesBody=document.querySelector("#notesBody")
-    let sticky = document.createElement('div')
-    sticky.className="stickyBase"
-    notesBody.appendChild(sticky)
+    let el =new Note("","")
+    //stickyArray.push(el)
+    notesBody.appendChild(el)
+
+}
+
+function delNotes(x){
 
 
-    let stickyConainerTop=document.createElement('div')
-    sticky.className="stickyContainerTop"
+}
+
+function showArray(){
+    console.log(stickyArray)
+}
+
+function Note(text, title) {
+
+    createStickyEl()
+    createLiseners()
     
+    this.text=text
+    this.title=title
 
-    let stickyDelete = document.createElement('div')
-    stickyDelete.className="stickyDelete"
-    sticky.appendChild(stickyDelete)
+    setData(text,title)
 
-    let stickyTitle = document.createElement('div')
+    function setData(text,title){
+        this.stickyText.value=text
+        this.stickyTitle.value=title
 
-    let stickyChangeColor = document.createElement('div')
-    stickyChangeColor.className="stickyChangeColor"
-    sticky.appendChild(stickyChangeColor)
+    }
+   
+    function createStickyEl(){
+        this.sticky = document.createElement('div')
+        sticky.className="stickyBase"
 
-    let stickyText = document.createElement('textarea')
-    stickyText.setAttribute('maxlength',500)
-    stickyText.className="stickyText"
-    sticky.appendChild(stickyText);
+        this.stickyConainerTop=document.createElement('div')
+        stickyConainerTop.className="stickyContainerTop"
+        sticky.appendChild(stickyConainerTop)
+    
+        this.stickyDelete = document.createElement('i')
+        stickyDelete.className="far fa-calendar-times stickyButtons"
+        stickyConainerTop.appendChild(stickyDelete)
+    
+        this.stickyTitle = document.createElement('input')
+        stickyTitle.className="stickyTitle"
+        stickyTitle.setAttribute('type', 'text');
+        stickyTitle.setAttribute('maxlength', '15');
+        stickyConainerTop.appendChild(stickyTitle)
+    
+        this.stickyChangeColor = document.createElement('i')
+        stickyChangeColor.className="fas fa-fill-drip stickyButtons"
+        stickyConainerTop.appendChild(stickyChangeColor)
+    
+        this.stickyText = document.createElement('textarea')
+        stickyText.setAttribute('maxlength',500)
+        stickyText.className="stickyText"
+        sticky.appendChild(stickyText);
 
-    let colors=["#00FA9A","#00B2EE","#FFFACD","#FFB6C1","#FFA54F","#FF6666","#EEE685"]
-    let colorId=0;
 
-    sticky.style.background=colors[colorId];
+    }
 
-    stickyChangeColor.addEventListener("click", function(e){
-       
-        if (colorId<colors.length)
-            colorId++
-        else
-            colorId=0
+    function createLiseners(){
 
+        let colors=["#00FA9A","#00B2EE","#FFFACD","#FFB6C1","#FFA54F","#FF6666","#EEE685"]
+        let colorId=0;
+    
         sticky.style.background=colors[colorId]
-    })
-
-    stickyDelete.addEventListener("click", function(e){
-        
-        sticky.parentNode.removeChild(sticky)
-
-    })
     
+    
+        stickyText.addEventListener("input", function(e){
+            //alert(stickyText.value)
+            this.text=stickyText.value
+            addToArray();
+        })
+    
+        stickyTitle.addEventListener("input", function(e){
+            //alert(stickyTitle.value)
+            this.title=stickyTitle.value
+            addToArray();
+        })
+    
+    
+        stickyChangeColor.addEventListener("click", function(e){
+           
+            if (colorId<colors.length)
+                colorId++
+            else
+                colorId=0
+    
+            sticky.style.background=colors[colorId]
+        })
+    
+        stickyDelete.addEventListener("click", function(e){
+            
+            sticky.parentNode.removeChild(sticky)
+    
+        })
+    }
+
+    function addToArray(){
+
+        stickyArray.push(this.text,this.title);
+    }
+
+    return sticky
+    
+
 }
