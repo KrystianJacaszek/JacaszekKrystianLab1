@@ -30,7 +30,9 @@ nav{
 
 }
 nav button{
-width: 100px;
+width: 200px;
+min-width: 100px;
+max-width: 500px;
 height: 50px;
 border-radius:5% 5% 10% 10%;
 background: var(--primary-4);
@@ -107,7 +109,7 @@ footer{
     background: none;
     min-height: 155px;
     max-height:355px;
-    min-width:215px;
+    min-width:250px;
     max-width:390px;
 
 }
