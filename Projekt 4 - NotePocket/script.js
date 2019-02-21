@@ -2,7 +2,21 @@ let stickyArray=[];
 
 function addNotes(){
 
-    let el =new Note("","",0)
+    function addZero(i){
+        return (i<10)? '0'+i:i
+    }
+
+    let d =new  Date();
+
+    let time="Data: "+d.getFullYear()+"."+
+             addZero(d.getMonth())+"."+
+             addZero(d.getDay())+" Godz:"+
+             addZero(d.getHours())+":"+
+             addZero(d.getMinutes())+":"+
+             addZero(d.getSeconds())
+
+    console.log(time)
+    let el =new Note("","",time,0)
 
 }
 
@@ -20,7 +34,8 @@ function loadLocal(){
             for (let i=0; i<stickyArray.length;i++){
                 let el=new Note(stickyArray[i][0],
                                 stickyArray[i][1],
-                                stickyArray[i][2],)
+                                stickyArray[i][2],
+                                stickyArray[i][3])
 
             }
 
@@ -45,7 +60,7 @@ function showArray(){
     console.log(stickyArray)
 }
 
-function Note(_title, _text,_color) {
+function Note(_title, _text,_time,_color) {
 
     let notesBody=document.querySelector("#notesBody")
 
@@ -55,14 +70,16 @@ function Note(_title, _text,_color) {
 
     notesBody.appendChild(ob.sticky)
 
-    setData(_title,_text,_color)
+    setData(_title,_text,_time,_color)
 
-    function setData(title,text,color){
-        stickyArray.push([title,text,color]);
+    function setData(title,text,time,color){
+        stickyArray.push([title,text,time,color]);
         ob.ArrayIndex=(stickyArray.length-1)
+        ob.time=time
         ob.title=title
         ob.colorId=color
         ob.text=text
+        ob.stickyTime.innerHTML=time
         ob.sticky.style.background=colors[color]
         ob.stickyText.value=text
         ob.stickyTitle.value=title
@@ -77,6 +94,10 @@ function Note(_title, _text,_color) {
 
         this.sticky = document.createElement('div')
         this.sticky.className="stickyBase"
+
+        this.stickyTime = document.createElement('div')
+        this.stickyTime.className="stickyTime"
+        this.sticky.appendChild(this.stickyTime)
 
         this.stickyConainerTop=document.createElement('div')
         this.stickyConainerTop.className="stickyContainerTop"
@@ -116,12 +137,12 @@ function Note(_title, _text,_color) {
    
         ob.stickyText.addEventListener("input", function(e){
             ob.changeText();
-            addToArray(ob.title,ob.text,ob.colorId);
+            addToArray(ob.title,ob.text,ob.time,ob.colorId);
            
         })
         ob.stickyTitle.addEventListener("input", function(e){
             ob.changeTitle()
-            addToArray(ob.title,ob.text,ob.colorId);
+            addToArray(ob.title,ob.text,ob.time,ob.colorId);
         })
         
     
@@ -135,7 +156,7 @@ function Note(_title, _text,_color) {
     
             ob.sticky.style.background=colors[ob.colorId]
 
-            addToArray(ob.title,ob.text,ob.colorId);
+            addToArray(ob.title,ob.text,ob.time,ob.colorId);
 
         })
     
@@ -148,14 +169,14 @@ function Note(_title, _text,_color) {
 
         ob.stickyPinUp.addEventListener("click", function(e){
             delToArray()
-            pinToArray(ob.title,ob.text,ob.colorId);
+            pinToArray(ob.title,ob.text,ob.time,ob.colorId);
             refreshSticky()
 
         })
     
 
-        function addToArray(title,text,colorId){
-            stickyArray.splice(ob.ArrayIndex,1,[title,text,colorId])
+        function addToArray(title,text,time,colorId){
+            stickyArray.splice(ob.ArrayIndex,1,[title,text,time,colorId])
             saveLocal()
         }
 
@@ -163,8 +184,8 @@ function Note(_title, _text,_color) {
             stickyArray.splice(ob.ArrayIndex,1)
             saveLocal()
         }
-        function pinToArray(title,text,colorId){
-            stickyArray.splice(0,0,[title,text,colorId])
+        function pinToArray(title,text,time,colorId){
+            stickyArray.splice(0,0,[title,text,time,colorId])
             saveLocal()
         }
 
