@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <script src="script.js"></script>
+    <title>Projekt 3 - SoundKit</title>
+</head>
+<body onload="load()">
+    
+    <header>Projekt 3 - SoundKit</header>
+
+    <nav>
+            <button type="button" id="playAll">PlayAll</button>
+            <button type="button" onclick="changeColors()">Change Colors</button>
+            <button type="button" id="recBtn">REC</button>
+    </nav>
+
+    <section>
+
+        <div id="channelsPlay" class="channels">
+        <div>
+                <button type="button" >Play Channel 1</button>
+                <button type="button" >Play Channel 2</button>        
+        </div>
+        <div>
+                <button type="button" >Play Channel 3</button>
+                <button type="button" >Play Channel 4</button>        
+        </div>
+        </div>
+
+    <div id="keyboard">
+        <div>
+                <button type="button" name="81" data-key="81" >Q</button>
+                <button type="button" name="87" data-key="87" >W</button>
+                <button type="button" name="69" data-key="69" >E</button>
+                <button type="button" name="82" data-key="82" >R</button>
+                <button type="button" name="84" data-key="84" >T</button>
+                <button type="button" name="89" data-key="89" >Y</button>
+                <button type="button" name="85" data-key="85" >U</button>
+                <button type="button" name="73" data-key="73" >I</button>
+                <button type="button" name="79" data-key="79" >O</button>
+
+        </div>
+        <div>
+                <button type="button" name="65" data-key="65" >Sample (A)</button>
+                <button type="button" name="83" data-key="83" >Sample (S)</button>
+                <button type="button" name="68" data-key="68" >FX (D)</button>
+                <button type="button" name="70" data-key="70" >FX (F)</button>
+
+        </div>
+    </div>
+    <div id="controlPanel" class="channels">
+
+            <div id="channels">
+                <div>
+                        <button type="button" value="onChan1">Channel 1</button>
+                        <button type="button" value="onChan2">Channel 2</button>        
+                </div>
+                <div>
+                        <button type="button" value="onChan3">Channel 3</button>
+                        <button type="button" value="onChan4">Channel 4</button>        
+                </div>
+        </div>
+    </div>
+
+
+            <audio data-key="81" src="sounds/boom.wav" ></audio>
+            <audio data-key="87" src="sounds/clap.wav" ></audio>
+            <audio data-key="69" src="sounds/hihat.wav" ></audio>
+            <audio data-key="82" src="sounds/kick.wav" ></audio>
+            <audio data-key="84" src="sounds/openhat.wav" ></audio>
+            <audio data-key="89" src="sounds/ride.wav" ></audio>
+            <audio data-key="85" src="sounds/snare.wav" ></audio>
+            <audio data-key="73" src="sounds/tink.wav" ></audio>
+            <audio data-key="79" src="sounds/tom.wav" ></audio>
+
+            <audio data-key="65" src="sounds/sample01.mp3" ></audio>
+            <audio data-key="83" src="sounds/sample02.mp3" ></audio>
+            <audio data-key="68" src="sounds/fx04.wav" ></audio>
+            <audio data-key="70" src="sounds/fx10.wav" ></audio>
+
+   
+        
+    </section>
+
+    <footer>Powered by:  <a href="mailto:krystian.jacaszek@microsoft.wsei.edu.pl">Krystian Jacaszek</a></footer>
+
+
+</body>
+</html>
