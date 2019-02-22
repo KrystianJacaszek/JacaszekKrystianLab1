@@ -7,16 +7,19 @@
     <link rel="stylesheet" type="text/css" href="style.css"/>
     <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
     <script src="script.js"></script>
-    <title>Szablon</title>
+    <title>Projekt 1 - Edytor graficzny</title>
 </head>
 <body onload="onLoad()">
     
-    <header>Szablon</header>
+    <header>Projekt 1 - Edytor graficzny</header>
 
     <nav>
-            <button type="button" onclick="basicFunc()">Przykład</button>
-            <button type="button" onclick="basicFunc()">Przykład</button>
-            <button type="button" onclick="basicFunc()">Przykład</button>
+
+        <button type="button" id="resetPic">Reset Picture</button>
+        <button type="button" id="redBtn">Red</button>
+        <button type="button" id="greenBtn">Green</button>
+        <button type="button" id="blueBtn">Blue</button>
+
     </nav>
 
     <section>
@@ -25,16 +28,16 @@
 
         <div id="sliders">
             <div>
-                <p>Jasność</p>
-                <input type="range" width="100%" name="bright" id="" min="0" max="255">
+                <p>Brightness</p>
+                <input type="range" width="100%" name="bright" id="rBright" min="-50" max="50">
             </div>
             <div>
-                <p>Kontrast</p>
-                <input type="range" width="100%" name="contr" id="" min="0" max="255">
+                <p>Contrast</p>
+                <input type="range" width="100%" name="contr" id="rContrast" min="-10" max="10">
             </div>
             <div>
-                <p>Nasycenie</p>
-                <input type="range" width="100%" name="sat" id="" min="0" max="255">
+                <p>Saturation</p>
+                <input type="range" width="100%" name="sat" id="rSaturation" min="-100" max="100">
             </div>                
         </div>
 
