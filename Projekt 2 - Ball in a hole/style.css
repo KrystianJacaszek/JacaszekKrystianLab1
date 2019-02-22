@@ -41,7 +41,7 @@ section{
     display: flex;
     justify-content: center;
     color: #000;
-    background: var(--primary-4);
+    background: var(--primary-1);
     min-height: 200px;
 }
 header{
@@ -55,6 +55,19 @@ footer{
     justify-content: center;
     align-self: flex-end;
     margin-top: 5px;
+}
+.time{
+    width: 200px;
+    height: 100px;
+    color: '#000';
+    border-radius:5% 5% 10% 10%;
+    background: var(--primary-4);
+    box-shadow: 0 4px 8px 0 var(--primary-2), 0 6px 20px 0 var(--primary-0);
+
+}
+canvas{
+    border:5px solid var(--primary-1);
+    background: var(--primary-4)
 }
 
 

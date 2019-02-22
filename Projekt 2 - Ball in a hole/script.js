@@ -1,108 +1,41 @@
-function basicFunc(){
-    document.querySelector("section").innerHTML+='test<br>';
-    console.log("test w konsoli");
-    
-}
-
 function load(){
-
-    let ball={
-        x:100,
-        y:100,
-        width:10,
-        height:10
-
-    }
-
-
-    collisionArray=[
-        {   x:275,
-            y:100,
-            width:50,
-            height:200},
-
-            {   x:0,
-                y:0,
-                width:600,
-                height:10
-            },
-            {   x:0,
-                y:290,
-                width:600,
-                height:10
-            },
-            {   x:0,
-                y:0,
-                width:10,
-                height:300
-            },
-            {   x:590,
-                y:0,
-                width:10,
-                height:300
-            },
-    ]
 
     let c = document.querySelector('#canvasArea')
     c.width=600
     c.height=300
     let ctx = c.getContext("2d");
 
-    function gameRender(){
-		
-        c.width=600
-        c.height=300
-        let ctx = c.getContext("2d");
+    let d = new Date()
+    let timeStart=d.Time
 
-        for(let i=0;i<collisionArray.length;i++){
-
-            let cache=collisionArray[i]
-            ctx.fillStyle="#000"
-            ctx.fillRect(cache.x,cache.y,cache.width,cache.height)
-
-        }
-
-
-        ballRender()
+    let ball={
+        x:25,
+        y:150,
+        r:5,
+        color:'black'
 
     }
 
-    function ballRender(){
-
-        ctx.beginPath
-        ctx.fillStyle='black'
-        ctx.arc(ball.x,ball.y,ball.width,0,2*Math.PI)
-        ctx.fill()
-        ctx.stroke()
-        ctx.endPath
+    let finnalHole={
+        x:570,
+        y:270,
+        r:5,
+        color:'red'
 
     }
 
-    function clearArea(){
-
-        ctx.clearRect(0,0,600,300)
-        
+    let velocityVec={
+        vX:0,
+        vY:0
     }
 
-    function collisionDetect(){
+        window.addEventListener('devicemotion', function(e){
+            let acc=e.accelerationIncludingGravity
 
-        for(let i=0;i<collisionArray.length;i++){
+            velocityVec.vX+=-acc.x
+            velocityVec.vY+=acc.y
 
-            let cache=collisionArray[i]
-            if(collisionDetectCheck(cache,ball))
-                console.log("kolizja")
-
-        }
-
-    }
-
-    function collisionDetectCheck(A,B){
-        return !(A.x + A.width < B.x ||
-                 B.x + B.width < A.x ||
-                 A.y + A.height < B.y ||
-                 B.y + B.height < A.y)
-
-    }
+        })
 
     window.addEventListener('keydown', function(e){
 
@@ -118,16 +51,181 @@ function load(){
 
     })
 
+    hollsArray=[{
+        x:100,
+        y:25,
+        r:10,
+        color:"blue"
+    },
+    {
+        x:100,
+        y:125,
+        r:10,
+        color:"blue"
+    },
+    {
+        x:100,
+        y:225,
+        r:10,
+        color:"blue"
+    },
+    {
+        x:300,
+        y:75,
+        r:10,
+        color:"blue"
+    },
+    {
+        x:300,
+        y:175,
+        r:10,
+        color:"blue"
+    },
+    {
+        x:300,
+        y:275,
+        r:10,
+        color:"blue"
+    },
+    {
+        x:500,
+        y:75,
+        r:10,
+        color:"blue"
+    },
+    {
+        x:500,
+        y:175,
+        r:10,
+        color:"blue"
+    },
+    {
+        x:555,
+        y:265,
+        r:10,
+        color:"blue"
+    },
+
+
+    ]
+
+    function gameRender(){
+		
+        c.width=600
+        c.height=300
+        let ctx = c.getContext("2d");
+
+        for(let i=0;i<hollsArray.length;i++){
+
+                renderHole(hollsArray[i])
+            
+        }
+
+
+        renderHole(finnalHole)
+
+        renderHole(ball)
+
+    }
+
+    function renderHole(hole){
+        ctx.beginPath()
+        ctx.fillStyle=hole.color
+        ctx.arc(hole.x,hole.y,hole.r,0,2*Math.PI)
+        ctx.fill()
+        ctx.stroke()
+        ctx.closePath()
+
+    }
+
+    function updateBall(){
+
+        let a=velocityVec.vX
+        let b=velocityVec.vY
+
+        ball.x+=a
+        ball.y+=b
+
+    }
+
+    function clearArea(){
+
+        ctx.clearRect(0,0,600,300)
+        
+    }
+
+    function collisionBorderDetect(){
+
+        if(ball.x+ball.r>=c.width ||
+           ball.x-ball.r<=0)
+                reversVelocityX()
+        
+        if(ball.y+ball.r>=c.height ||
+            ball.y-ball.r<=0)
+                reversVelocityY()
+    }
+
+    function reversVelocityX(){
+        velocityVec.vX*=-1
+    }
+    function reversVelocityY(){
+        velocityVec.vY*=-1
+    }
+
+    function collisionDetect(){
+
+        for(let i=0;i<hollsArray.length;i++){
+
+            let cache = hollsArray[i]
+
+            if(collisionDetectCheck(cache,ball))
+                restartPoz()
+        }
+
+    }
+
+    function collisionWinDetect(){
+
+        if(collisionDetectCheck(finnalHole,ball))
+            winGame()
+
+    }
+
+    function winGame(){
+
+        alert('WYGRAŁES')
+        ball.x=25
+        ball.y=150
+
+    }
+
+    function restartPoz(){
+        let d = new Date()
+        let timeEnd=d.Time-timeStart
+        alert('Wpdales do dziury, a twoj czas to: '+timeEnd)
+        ball.x=25
+        ball.y=150
+        timeStart=Date.now()
+    }
+
+    function collisionDetectCheck(A,B){
+        return !(A.x + A.r < B.x ||
+                 B.x + B.r < A.x ||
+                 A.y + A.r < B.y ||
+                 B.y + B.r < A.y)
+
+    }
 
     function gameLoop(){
 
-        clearArea()
-
+        collisionBorderDetect()
         collisionDetect()
+        collisionWinDetect()
 
+        updateBall()
         gameRender()
 
-        setTimeout(function(){ gameLoop()}, 1000/144)
+        requestAnimationFrame(gameLoop);
     }
 
     gameLoop()
