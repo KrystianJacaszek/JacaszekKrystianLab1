@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+    <script src="script.js"></script>
+    <title>Projekt 1 - Edytor graficzny</title>
+</head>
+<body onload="onLoad()">
+    
+    <header>Projekt 1 - Edytor graficzny</header>
+
+    <nav>
+
+        <button type="button" id="resetPic">Reset Picture</button>
+        <button type="button" id="redBtn">Red</button>
+        <button type="button" id="greenBtn">Green</button>
+        <button type="button" id="blueBtn">Blue</button>
+
+    </nav>
+
+    <section>
+
+        <canvas id="canImg"></canvas>
+
+        <div id="sliders">
+            <div>
+                <p>Brightness</p>
+                <input type="range" width="100%" name="bright" id="rBright" min="-50" max="50">
+            </div>
+            <div>
+                <p>Contrast</p>
+                <input type="range" width="100%" name="contr" id="rContrast" min="-10" max="10">
+            </div>
+            <div>
+                <p>Saturation</p>
+                <input type="range" width="100%" name="sat" id="rSaturation" min="-100" max="100">
+            </div>                
+        </div>
+
+
+        
+    </section>
+
+    <footer>Powered by:  <a href="mailto:krystian.jacaszek@microsoft.wsei.edu.pl">Krystian Jacaszek</a></footer>
+
+
+</body>
+</html>
