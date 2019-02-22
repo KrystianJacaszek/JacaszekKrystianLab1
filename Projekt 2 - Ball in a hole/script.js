@@ -5,8 +5,22 @@ function load(){
     c.height=300
     let ctx = c.getContext("2d");
 
-    let d = new Date()
-    let timeStart=d.Time
+    let restartBtn = document.querySelector('#restartBtn')
+
+    restartBtn.addEventListener('click',function(e){
+
+        alert('Zresetowales gre')
+        ball.x=25
+        ball.y=150
+        dateTime=Date.now()
+    
+
+    })
+
+    let dateTime=Date.now()
+    let time
+    let timeDuration =0
+    let stringTime
 
     let ball={
         x:25,
@@ -32,8 +46,8 @@ function load(){
         window.addEventListener('devicemotion', function(e){
             let acc=e.accelerationIncludingGravity
 
-            velocityVec.vX+=-acc.x
-            velocityVec.vY+=acc.y
+            velocityVec.vX+=-acc.x/10
+            velocityVec.vY+=acc.y/10
 
         })
 
@@ -179,33 +193,9 @@ function load(){
             let cache = hollsArray[i]
 
             if(collisionDetectCheck(cache,ball))
-                restartPoz()
+                failHoll()
         }
 
-    }
-
-    function collisionWinDetect(){
-
-        if(collisionDetectCheck(finnalHole,ball))
-            winGame()
-
-    }
-
-    function winGame(){
-
-        alert('WYGRAŁES')
-        ball.x=25
-        ball.y=150
-
-    }
-
-    function restartPoz(){
-        let d = new Date()
-        let timeEnd=d.Time-timeStart
-        alert('Wpdales do dziury, a twoj czas to: '+timeEnd)
-        ball.x=25
-        ball.y=150
-        timeStart=Date.now()
     }
 
     function collisionDetectCheck(A,B){
@@ -216,13 +206,85 @@ function load(){
 
     }
 
+    function collisionWinDetect(){
+
+        if(collisionDetectCheck(finnalHole,ball))
+            winGame()
+
+    }
+
+    function restartGame(){
+        velocityVec.vX=0
+        velocityVec.vY=0
+        ball.x=25
+        ball.y=150
+        dateTime=Date.now()
+    }
+
+    function winGame(){
+
+        alert('WIN\nprzed czasem: '+stringTime+"\ntwoj czas to: "+timeToString(timeDuration))
+        restartGame()
+
+    }
+
+    function failHoll(){
+        
+        alert('Wpdales do dziury, a twoj czas to: '+timeToString(timeDuration))
+        restartGame()
+        
+    }
+    function checkTime(){
+
+        if (time<=0){
+            alert("Koniec czasu 00:00:00")
+            restartGame()
+
+        }
+
+    }
+
+    function timer(){
+        let tim=document.querySelector('#time')
+        
+        timeLimit=60000
+        timeDuration=Date.now()-dateTime
+        time=timeLimit-timeDuration
+
+        stringTime=timeToString(time)           
+        tim.innerHTML=stringTime
+
+    }
+
+    setInterval(function(){
+        timer()
+
+    },1)
+
+    function timeToString(time){
+
+        function checkZero(i){
+            if(i<10 && i>=0)
+                return ("0"+i)
+            else
+            return i
+        }
+
+        return(checkZero(Math.floor(time/60000))+":"+
+        checkZero(Math.floor(time/1000))+":"+
+        checkZero(time%600))
+    }
+
     function gameLoop(){
 
         collisionBorderDetect()
         collisionDetect()
         collisionWinDetect()
 
+        checkTime()
+
         updateBall()
+
         gameRender()
 
         requestAnimationFrame(gameLoop);

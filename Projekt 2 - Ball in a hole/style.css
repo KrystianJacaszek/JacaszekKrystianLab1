@@ -24,14 +24,15 @@ a:link, a:visited{
 }
 nav{
     display: flex;
-    flex-direction: row;
-    justify-content:space-around;
+    flex-direction: column-reverse;
+    align-items: center;
     margin: 5ex 4ex;
 
 }
 nav button{
-width: 100px;
+width: 200px;
 height: 50px;
+margin: 30px;
 border-radius:5% 5% 10% 10%;
 background: var(--primary-4);
 box-shadow: 0 4px 8px 0 var(--primary-2), 0 6px 20px 0 var(--primary-0);
@@ -57,9 +58,13 @@ footer{
     margin-top: 5px;
 }
 .time{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
     width: 200px;
     height: 100px;
-    color: '#000';
+    color: var(--primary-2);
     border-radius:5% 5% 10% 10%;
     background: var(--primary-4);
     box-shadow: 0 4px 8px 0 var(--primary-2), 0 6px 20px 0 var(--primary-0);
