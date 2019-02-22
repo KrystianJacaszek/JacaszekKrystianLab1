@@ -33,7 +33,7 @@ function onLoad(){
     rContrast = document.querySelector('#rContrast')
     rSaturation = document.querySelector('#rSaturation')
 
-    rBright.addEventListener('change', function(){
+    rBright.addEventListener('input', function(){
 
         changeBrightness(imageDataBackup,makeBackup(),rBright.value)
         changeContrast(makeBackup(),rContrast.value)
@@ -44,7 +44,7 @@ function onLoad(){
     })
 
 
-    rContrast.addEventListener('change', function(){
+    rContrast.addEventListener('input', function(){
 
         changeBrightness(imageDataBackup,makeBackup(),rBright.value)
         changeContrast(makeBackup(),rContrast.value)
@@ -55,7 +55,7 @@ function onLoad(){
     })
 
     
-    rSaturation.addEventListener('change', function(){
+    rSaturation.addEventListener('input', function(){
 
         changeBrightness(imageDataBackup,makeBackup(),rBright.value)
         changeContrast(makeBackup(),rContrast.value)
