@@ -66,35 +66,24 @@ icon{
     size: 10px;
 }
 
-
-#chatbox{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center
+#chatBox{
+    margin-top: 10px;
 }
 
-#chatbox{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center
-}
 #chatBoxShow{
+    padding: 15px 0 15px 0;
     display: flex;
-    background-color: var(--primary-4);
-    height: 400px;
-    width: 100%;
-
-}
-
-#chatbox div:last-child{
-    display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: var(--primary-4);
+    min-height: 50px;
+    max-height: 400px;
+    overflow:scroll;
     
+
 }
+
 #manageSend{
     display: flex;
     flex-direction: row;
@@ -104,6 +93,7 @@ icon{
 }
 #inputMess{
     display: flex;
+    width: 300px;
     
 }
 
@@ -113,8 +103,9 @@ icon{
 }
 .genMess{
     display: flex;
-    flex-direction: row;
     color: var(--primary-1);
-    justify-content: spacebetween;
+    width: 600px
+   
+    
 }
 
