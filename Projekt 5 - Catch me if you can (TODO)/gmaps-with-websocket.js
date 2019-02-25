@@ -69,6 +69,8 @@ function onWSOpen(data) {
 function onWSMessage(e) {
     let eData = JSON.parse(e.data)
 
+    console.log(e.data)
+
         eData.players.forEach((entry) => {
             if (!players['user' + entry.id]) {
                 players['user' + entry.id] = new google.maps.Marker({
