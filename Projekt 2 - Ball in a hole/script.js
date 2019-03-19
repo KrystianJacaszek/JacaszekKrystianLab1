@@ -18,6 +18,8 @@ function load(){
 
     })
 
+    let numbersHoles=20
+
     let dateTime=Date.now()
     let time
     let timeDuration =0
@@ -44,7 +46,7 @@ function load(){
     let finnalHole=[]
     randomFinnalHole()
     let hollsArray=[]    
-    randomHoles(30)
+    randomHoles(numbersHoles)
 
 
     let velocityVec={
@@ -268,8 +270,9 @@ function load(){
         alert('WIN\nprzed czasem: '+stringTime+"\ntwoj czas to: "+timeToString(timeDuration))
       
         randomStart()
-        randomFinnalHole()  
-        randomHoles(30)
+        randomFinnalHole()
+        numbersHoles+=10
+        randomHoles(numbersHoles)
         
         restartGame()
 
