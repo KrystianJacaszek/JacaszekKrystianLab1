@@ -4,14 +4,15 @@ function load(){
     c.width=600
     c.height=300
     let ctx = c.getContext("2d");
+   
 
     let restartBtn = document.querySelector('#restartBtn')
 
     restartBtn.addEventListener('click',function(e){
 
         alert('Zresetowales gre')
-        ball.x=25
-        ball.y=150
+        ball.x=ballStart.x
+        ball.y=ballStart.y
         dateTime=Date.now()
     
 
@@ -30,13 +31,21 @@ function load(){
 
     }
 
-    let finnalHole={
-        x:570,
-        y:270,
+    let ballStart={
+        x:25,
+        y:150,
         r:5,
-        color:'red'
+        color:'black'
 
     }
+
+    randomStart()
+
+    let finnalHole=[]
+    randomFinnalHole()
+    let hollsArray=[]    
+    randomHoles(30)
+
 
     let velocityVec={
         vX:0,
@@ -65,63 +74,89 @@ function load(){
 
     })
 
-    hollsArray=[{
-        x:100,
-        y:25,
-        r:10,
-        color:"blue"
-    },
-    {
-        x:100,
-        y:125,
-        r:10,
-        color:"blue"
-    },
-    {
-        x:100,
-        y:225,
-        r:10,
-        color:"blue"
-    },
-    {
-        x:300,
-        y:75,
-        r:10,
-        color:"blue"
-    },
-    {
-        x:300,
-        y:175,
-        r:10,
-        color:"blue"
-    },
-    {
-        x:300,
-        y:275,
-        r:10,
-        color:"blue"
-    },
-    {
-        x:500,
-        y:75,
-        r:10,
-        color:"blue"
-    },
-    {
-        x:500,
-        y:175,
-        r:10,
-        color:"blue"
-    },
-    {
-        x:555,
-        y:265,
-        r:10,
-        color:"blue"
-    },
+    function letRand(min,max){
+        return Math.floor(Math.random() * (max - min) ) + min;
+    }
 
 
-    ]
+    function randomFinnalHole(){
+
+        finnalHole={
+            x:letRand(500,590),
+            y:letRand(10,290),
+            r:10,
+            color:"red"
+        }
+
+    }
+
+    function checkAvail(tab, hole){
+
+        if(tab.length==0){
+            console.log("EMPTY")
+            return false
+        }else if(tab.length==undefined){
+            if(collisionDetectCheckHoles(tab,hole)){
+                return true
+            }else
+                return false
+        }
+        else{
+
+            for(let i=0;i<tab.length;i++){
+
+                let cache = tab[i]
+    
+                if(collisionDetectCheckHoles(cache,hole)){
+                    console.log("fail")
+                    return true
+                }
+                    
+            }
+            return false
+        }
+
+    }
+
+    function randomStart(){
+
+        ball= {
+            x:letRand(10,30),
+            y:letRand(10,290),
+            r:5,
+            color:"black"
+        }
+
+        ballStart.x=ball.x
+        ballStart.y=ball.y
+
+    }
+
+    function randomHoles(length){
+
+        hollsArray=[]
+
+        for(let i =0;i<length;i++){
+ 
+            randHole= {
+                x:letRand(10,590),
+                y:letRand(10,290),
+                r:10,
+                color:"blue"
+            }
+
+            if((!checkAvail(hollsArray,randHole))&&
+                (!checkAvail(finnalHole,randHole))&&
+                (!checkAvail(ballStart,randHole))){
+                    
+                    console.log(randHole)
+                    hollsArray.push(randHole)
+
+                }else{
+                    --i
+                }
+      }
+    }
 
     function gameRender(){
 		
@@ -134,7 +169,6 @@ function load(){
                 renderHole(hollsArray[i])
             
         }
-
 
         renderHole(finnalHole)
 
@@ -206,6 +240,14 @@ function load(){
 
     }
 
+    function collisionDetectCheckHoles(A,B){
+        return !(A.x + A.r+30 < B.x ||
+                 B.x + B.r+30 < A.x ||
+                 A.y + A.r+30 < B.y ||
+                 B.y + B.r+30 < A.y)
+
+    }
+
     function collisionWinDetect(){
 
         if(collisionDetectCheck(finnalHole,ball))
@@ -216,14 +258,19 @@ function load(){
     function restartGame(){
         velocityVec.vX=0
         velocityVec.vY=0
-        ball.x=25
-        ball.y=150
+        ball.x=ballStart.x
+        ball.y=ballStart.y
         dateTime=Date.now()
     }
 
     function winGame(){
 
         alert('WIN\nprzed czasem: '+stringTime+"\ntwoj czas to: "+timeToString(timeDuration))
+      
+        randomStart()
+        randomFinnalHole()  
+        randomHoles(30)
+        
         restartGame()
 
     }
